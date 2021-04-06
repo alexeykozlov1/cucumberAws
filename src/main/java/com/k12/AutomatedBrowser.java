@@ -1,19 +1,12 @@
 package com.k12;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public interface AutomatedBrowser {
 
-    DesiredCapabilities getDesiredCapabilities();
-
-    void captureCompleteHarFile();
-
     WebDriver getWebDriver();
-
-    void captureHarFile();
-
-    void saveHarFile(String file);
 
     void setWebDriver(WebDriver webDriver);
 
@@ -39,17 +32,31 @@ public interface AutomatedBrowser {
 
     String getTextFromElementWithId(String id, int waitTime);
 
+    void clickElementWithName(String name);
+
+    void clickElementWithName(String name, int waitTime);
+
     void clickElementWithXPath(String xpath);
 
     void clickElementWithXPath(String xpath, int waitTime);
+
+    void selectOptionByTextFromSelectWithName(String optionText, String name);
+
+    void selectOptionByTextFromSelectWithName(String optionText, String name, int waitTime);
 
     void selectOptionByTextFromSelectWithXPath(String optionText, String xpath);
 
     void selectOptionByTextFromSelectWithXPath(String optionText, String xpath, int waitTime);
 
+    void populateElementWithName(String name, String text);
+
+    void populateElementWithName(String xpath, String text, int waitTime);
+
     void populateElementWithXPath(String xpath, String text);
 
     void populateElementWithXPath(String xpath, String text, int waitTime);
+
+    void setDefaultExplicitWaitTime(int waitTime);
 
     String getTextFromElementWithXPath(String xpath);
 
@@ -87,10 +94,17 @@ public interface AutomatedBrowser {
 
     String getTextFromElement(String locator, int waitTime);
 
+    DesiredCapabilities getDesiredCapabilities();
+
+    void captureHarFile();
+
+    void saveHarFile(String file);
+
+    void captureCompleteHarFile();
+
     void blockRequestTo(String url, int responseCode);
 
     void alterResponseFrom(String url, int responseCode, String  responseBody);
 
     void maximizeWindow();
 }
-

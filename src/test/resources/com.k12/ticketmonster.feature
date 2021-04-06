@@ -1,6 +1,6 @@
 Feature: Test TicketMonster With Aliases
   Scenario: Purchase Tickets with default wait time
-    Given I open the browser "ChromeNoImplicitWaitLambda"
+    Given I open the browser "ChromeNoImplicitWait"
     And I set the default explicit wait time to "30" seconds
     When I open the URL "https://ticket-monster.herokuapp.com"
     And I click the "Buy tickets now" button
@@ -16,7 +16,7 @@ Feature: Test TicketMonster With Aliases
     Then I close the browser
 
   Scenario: Purchase Tickets with default wait time and aliases
-    Given I open the browser "ChromeNoImplicitWaitLambda"
+    Given I open the browser "ChromeHeadless"
     And I set the following aliases:
       | Venue              | venueSelector |
       | Book               | bookButton    |

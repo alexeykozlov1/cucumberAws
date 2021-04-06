@@ -5,13 +5,6 @@ import com.k12.decorators.*;
 public class AutomatedBrowserFactory {
 
     public AutomatedBrowser getAutomatedBrowser(final String browser) {
-        if ("ChromeNoImplicitWait".equalsIgnoreCase(browser)) {
-            return getChromeBrowserNoImplicitWait();
-        }
-
-        if ("FirefoxNoImplicitWait".equalsIgnoreCase(browser)) {
-            return getFirefoxBrowserNoImplicitWait();
-        }
 
         if ("Chrome".equalsIgnoreCase(browser)) {
             return getChromeBrowser(false);
@@ -29,6 +22,13 @@ public class AutomatedBrowserFactory {
             return getFirefoxBrowser(true);
         }
 
+        if ("ChromeNoImplicitWait".equalsIgnoreCase(browser)) {
+            return getChromeBrowserNoImplicitWait();
+        }
+
+        if ("FirefoxNoImplicitWait".equalsIgnoreCase(browser)) {
+            return getFirefoxBrowserNoImplicitWait();
+        }
         if ("BrowserStackEdge".equalsIgnoreCase(browser)) {
             return getBrowserStackEdge();
         }
@@ -49,10 +49,40 @@ public class AutomatedBrowserFactory {
 
     }
 
-    private AutomatedBrowser getChromeBrowser() {
-        return new ChromeDecorator(
-                new ImplicitWaitDecorator(10,
-                        new WebDriverDecorator())
+
+    private AutomatedBrowser getBrowserStackAndroid() {
+        return new BrowserStackDecorator(
+                new BrowserStackAndroidDecorator(
+                        new ImplicitWaitDecorator(10,
+                                new WebDriverDecorator()
+                        )
+                )
+        );
+    }
+
+    private AutomatedBrowser getBrowserStackAndroidNoImplicitWait() {
+        return new BrowserStackDecorator(
+                new BrowserStackAndroidDecorator(
+                        new WebDriverDecorator()
+                )
+        );
+    }
+
+    private AutomatedBrowser getBrowserStackEdge() {
+        return new BrowserStackDecorator(
+                new BrowserStackEdgeDecorator(
+                        new ImplicitWaitDecorator(10,
+                                new WebDriverDecorator()
+                        )
+                )
+        );
+    }
+
+    private AutomatedBrowser getBrowserStackEdgeNoImplicitWait() {
+        return new BrowserStackDecorator(
+                new BrowserStackEdgeDecorator(
+                        new WebDriverDecorator()
+                )
         );
     }
 
@@ -87,41 +117,6 @@ public class AutomatedBrowserFactory {
     private AutomatedBrowser getFirefoxBrowserNoImplicitWait() {
         return new FirefoxDecorator(
                 new BrowserMobDecorator(
-                        new WebDriverDecorator()
-                )
-        );
-    }
-
-    private AutomatedBrowser getBrowserStackEdge() {
-        return new BrowserStackDecorator(
-                new BrowserStackEdgeDecorator(
-                        new ImplicitWaitDecorator(10,
-                                new WebDriverDecorator()
-                        )
-                )
-        );
-    }
-
-    private AutomatedBrowser getBrowserStackEdgeNoImplicitWait() {
-        return new BrowserStackDecorator(
-                new BrowserStackEdgeDecorator(
-                        new WebDriverDecorator()
-                )
-        );
-    }
-    private AutomatedBrowser getBrowserStackAndroid() {
-        return new BrowserStackDecorator(
-                new BrowserStackAndroidDecorator(
-                        new ImplicitWaitDecorator(10,
-                                new WebDriverDecorator()
-                        )
-                )
-        );
-    }
-
-    private AutomatedBrowser getBrowserStackAndroidNoImplicitWait() {
-        return new BrowserStackDecorator(
-                new BrowserStackAndroidDecorator(
                         new WebDriverDecorator()
                 )
         );

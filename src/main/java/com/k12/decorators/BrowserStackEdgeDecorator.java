@@ -17,7 +17,7 @@ public class BrowserStackEdgeDecorator extends AutomatedBrowserBase {
         caps.setCapability("os", "Windows");
         caps.setCapability("os_version", "10");
         caps.setCapability("browser", "Edge");
-        caps.setCapability("browser_version", "insider preview");
+        caps.setCapability("browser_version", "latest");
         caps.setCapability("browserstack.local", "false");
         caps.setCapability("browserstack.selenium_version", "3.7.0");
         return caps;

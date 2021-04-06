@@ -29,18 +29,21 @@ public class BrowserMobDecorator extends AutomatedBrowserBase {
 
     @Override
     public DesiredCapabilities getDesiredCapabilities() {
+
         proxy = new BrowserMobProxyServer();
+
         proxy.start(0);
+
+        final Proxy seleniumProxy = new Proxy();
+        final String proxyStr = "localhost:" + proxy.getPort();
+        seleniumProxy.setHttpProxy(proxyStr);
+        seleniumProxy.setSslProxy(proxyStr);
 
         final DesiredCapabilities desiredCapabilities =
                 getAutomatedBrowser().getDesiredCapabilities();
 
-        final Proxy seleniumProxy = new Proxy();
-        final String proxyStr = "localhost:" + proxy.getPort();
-
-        seleniumProxy.setHttpProxy(proxyStr);
-        seleniumProxy.setSslProxy(proxyStr);
         desiredCapabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+
         return desiredCapabilities;
     }
 
