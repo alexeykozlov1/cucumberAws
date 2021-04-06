@@ -1,6 +1,6 @@
 package com.k12;
 
-import com.k12.decoratorbase.*;
+import com.k12.decorators.*;
 
 public class AutomatedBrowserFactory {
 

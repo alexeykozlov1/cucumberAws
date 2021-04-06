@@ -1,4 +1,4 @@
-package com.k12.decoratorbase;
+package com.k12.decorators;
 
 import com.k12.AutomatedBrowser;
 import com.k12.decoratorbase.AutomatedBrowserBase;

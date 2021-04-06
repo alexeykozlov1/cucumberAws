@@ -1,6 +1,9 @@
 package com.k12.decoratorbase;
 
 import com.k12.AutomatedBrowser;
+import com.k12.AutomatedBrowserFactory;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -9,7 +12,8 @@ public class AutomatedBrowserBase implements AutomatedBrowser {
 
     public AutomatedBrowserBase() {
     }
-
+    static private final AutomatedBrowserFactory AUTOMATED_BROWSER_FACTORY
+            = new AutomatedBrowserFactory();
     public AutomatedBrowserBase(final AutomatedBrowser automatedBrowser) {
         this.automatedBrowser = automatedBrowser;
     }
@@ -63,6 +67,7 @@ public class AutomatedBrowserBase implements AutomatedBrowser {
         }
     }
 
+    @And("^I click the \\w+(?:\\s+\\w+)* with the id \"([^\"]*)\"$")
     @Override
     public void clickElementWithId(final String id) {
         if (getAutomatedBrowser() != null) {
@@ -342,6 +347,20 @@ public class AutomatedBrowserBase implements AutomatedBrowser {
     public void maximizeWindow() {
         if (getAutomatedBrowser() != null) {
             getAutomatedBrowser().maximizeWindow();
+        }
+    }
+    @Given("^I open the browser \"([^\"]*)\"$")
+    public void openBrowser(String browser) {
+        automatedBrowser =
+                AUTOMATED_BROWSER_FACTORY.getAutomatedBrowser(browser);
+        automatedBrowser.init();
+    }
+
+    @Given("^I close the browser$")
+    public void closeBrowser() {
+        if (automatedBrowser != null) {
+            automatedBrowser.destroy();
+            automatedBrowser = null;
         }
     }
 }
